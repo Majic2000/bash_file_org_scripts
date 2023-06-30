@@ -1,0 +1,29 @@
+
+
+#!/bin/bash
+
+read -p "directory: " location
+
+readarray -t test < <(ls ~/Desktop/upskilling/bash_cours/"$location")
+
+echo "${test[@]}"
+
+counter=0
+
+while [[ counter -lt ${#test[@]} ]]; do
+
+        case "${test[counter]}" in
+        *jpg|*jpeg|*png)
+                echo "it is a jpeg"
+                mkdir pictures
+                mv ~/Desktop/upskilling/bash_cours/"$location"/"${test[counter]}" pictures/
+                ;;
+	# Here can just add different cases for all other extensions
+	# Change the extension type and folder name...
+        *)
+                echo "default"
+                ;;
+        esac
+        counter=$((counter+1))
+done
+

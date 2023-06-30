@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "welcome to script one"
+
+# Read file location
+read -p "directory: " file_location
+
+# Extract the files from location at maxdepth 1 
+readarray -t files_array < <(find "$file_location" -maxdepth 1 -type f)
+
+# For each loop to go through the files and ask to remove
+for file in "${files_array[@]}"; do
+	read -p "Do you want to delete $file? (y/n)" choice
+	if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
+		rm -i $file
+		echo "Deleted $file"
+	else
+		echo "Skipped $file"
+	fi
+done
+
+exit 0

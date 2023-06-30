@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# Step 1: Iterate over the output of the ls command using a while loop
+while IFS= read -r file; do
+  echo "Processing file: $file"
+  
+  # Step 2: Use a case statement to glob the file names for their file extension
+  case "$file" in
+    *.jpg|*.jpeg|*.png)
+      echo "Moving image file: $file"
+      # Logic to move image files to the "images" subfolder
+      mkdir -p images
+      mv "$file" images/
+      ;;
+
+    *.doc|*.docx|*.txt|*.pdf)
+      echo "Moving document file: $file"
+      # Logic to move document files to the "documents" subfolder
+      mkdir -p documents
+      mv "$file" documents/
+      ;;
+
+    *.xls|*.xlsx|*.csv)
+      echo "Moving spreadsheet file: $file"
+      # Logic to move spreadsheet files to the "spreadsheets" subfolder
+      mkdir -p spreadsheets
+      mv "$file" spreadsheets/
+      ;;
+
+    *.sh)
+      echo "Moving script file: $file"
+      # Logic to move script files to the "scripts" subfolder
+      mkdir -p scripts
+      mv "$file" scripts/
+      ;;
+
+    *.zip|*.tar|*.tar.gz|*.tar.bz2)
+      echo "Moving archive file: $file"
+      # Logic to move archive files to the "archives" subfolder
+      mkdir -p archives
+      mv "$file" archives/
+      ;;
+
+    *.ppt|*.pptx)
+      echo "Moving presentation file: $file"
+      # Logic to move presentation files to the "presentations" subfolder
+      mkdir -p presentations
+      mv "$file" presentations/
+      ;;
+
+    *.mp3)
+      echo "Moving audio file: $file"
+      # Logic to move audio files to the "audio" subfolder
+      mkdir -p audio
+      mv "$file" audio/
+      ;;
+
+    *.mp4)
+      echo "Moving video file: $file"
+      # Logic to move video files to the "video" subfolder
+      mkdir -p video
+      mv "$file" video/
+      ;;
+
+    *)
+      echo "Leaving file in current folder: $file"
+      ;;
+  esac
+done < <(ls)
+
+# Add your logic for organizing the files within the loop
+
